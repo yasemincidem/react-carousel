@@ -1,28 +1,20 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
   mode: 'development',
-  entry: {
-    app: './src/index.js',
-    demo: './demo/index.js'
-  },
+  entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
   },
   resolve: {
-    extensions: [".js", ".jsx"]
+    extensions: ['.js', '.jsx'],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      inject: false,
-      chunks: ['app'],
+      title: 'Output Management',
     }),
-    new HtmlWebpackPlugin({
-      inject: false,
-      chunks: ['demo'],
-    })
   ],
   module: {
     rules: [
@@ -30,17 +22,16 @@ module.exports = {
         test: /\.jsx?/,
         exclude: /(node_modules)/,
         use: {
-          loader: "babel-loader"
-        }
-      }
-    ]
+          loader: 'babel-loader',
+        },
+      },
+    ],
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
     hotOnly: true,
-    open:true,
+    open: true,
     port: 3000,
   },
 };
-
