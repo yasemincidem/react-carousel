@@ -3,15 +3,26 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.js',
+  entry: {
+    app: './src/index.js',
+    demo: './demo/index.js'
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: '[name].js',
+  },
+  resolve: {
+    extensions: [".js", ".jsx"]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Output Management',
+      inject: false,
+      chunks: ['app'],
     }),
+    new HtmlWebpackPlugin({
+      inject: false,
+      chunks: ['demo'],
+    })
   ],
   module: {
     rules: [
